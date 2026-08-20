@@ -48,4 +48,4 @@ jobs:
       run: |
         echo "✅ Successfully built and updated container image!"
         echo "🚀 Image pushed as: ${{ secrets.DOCKERHUB_USERNAME }}/my-image-name:${{ env.TIMESTAMP }}"
-        echo "🔄 'latest' tag has been updated."
+        echo "🔄 'latest' tag has been updated ."
