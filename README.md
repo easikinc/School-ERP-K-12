@@ -1,0 +1,1 @@
+[![Docker Image CI](https://github.com/easikinc/School-ERP-K-12/actions/workflows/docker-image.yml/badge.svg?branch=master)](https://github.com/easikinc/School-ERP-K-12/actions/workflows/docker-image.yml)
