@@ -1,0 +1,50 @@
+# ==========================================
+# Byte-compiled / optimized / DLL files
+# ==========================================
+__pycache__/
+*.py[cod]
+*$py.class
+
+# ==========================================
+# Virtual Environments
+# ==========================================
+.venv/
+venv/
+env/
+ENV/
+*.venv/
+
+# ==========================================
+# Django Specific Exclusions
+# ==========================================
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+
+# ==========================================
+# Pillow / User Media Outputs
+# ==========================================
+media/
+# Optional: Keep the media directory structure but ignore files inside
+# media/*
+# !media/.gitkeep
+
+# ==========================================
+# Static Files (Whitenoise / Collectstatic)
+# ==========================================
+staticfiles/
+
+# ==========================================
+# Environment Variables (python-decouple)
+# ==========================================
+.env
+.env.local
+
+# ==========================================
+# IDEs and Editors
+# ==========================================
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
