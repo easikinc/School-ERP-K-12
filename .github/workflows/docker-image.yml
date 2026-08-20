@@ -33,19 +33,19 @@ jobs:
       run: |
         docker build . \
           --file Dockerfile \
-          --tag ${{ secrets.DOCKERHUB_USERNAME }}/'School ERP K-12':${{ env.TIMESTAMP }} \
-          --tag ${{ secrets.DOCKERHUB_USERNAME }}/'School ERP K-12':latest
+          --tag ${{ secrets.DOCKERHUB_USERNAME }}/erpk-12:${{ env.TIMESTAMP }} \
+          --tag ${{ secrets.DOCKERHUB_USERNAME }}/erpk-12:latest
 
     # 4. Push the image variants to Docker Hub
     - name: Push image to Docker Hub
       run: |
-        docker push ${{ secrets.DOCKERHUB_USERNAME }}/'School ERP K-12':${{ env.TIMESTAMP }}
-        docker push ${{ secrets.DOCKERHUB_USERNAME }}/'School ERP K-12':latest
+        docker push ${{ secrets.DOCKERHUB_USERNAME }}/erpk-12:${{ env.TIMESTAMP }}
+        docker push ${{ secrets.DOCKERHUB_USERNAME }}/erpk-12:latest
 
     # 5. Conditional confirmation step on successful push
     - name: Status Update
       if: success()
       run: |
         echo "✅ Successfully built and updated container image!"
-        echo "🚀 Image pushed as: ${{ secrets.DOCKERHUB_USERNAME }}/'School ERP K-12':${{ env.TIMESTAMP }}"
+        echo "🚀 Image pushed as: ${{ secrets.DOCKERHUB_USERNAME }}/erpk-12:${{ env.TIMESTAMP }}"
         echo "🔄 'latest' tag has been updated ."
