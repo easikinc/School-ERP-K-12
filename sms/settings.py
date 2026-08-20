@@ -18,6 +18,7 @@ from decouple import config
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
@@ -80,6 +81,7 @@ WSGI_APPLICATION = 'sms.wsgi.application'
 
 
 # Database
+
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 if config('DATABASE_URL', default=None):
@@ -97,6 +99,7 @@ else:
             'NAME': BASE_DIR / 'db.sqlite3',
         }
     }
+    
 
 
 # Password validation

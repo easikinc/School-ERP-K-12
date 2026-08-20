@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/app
+      - sqlite_data:/app/db_volume
+    ports:
+      - "8000:8000"
+    environment:
+      - DEBUG=1
+      - SECRET_KEY=your_development_secret_key
+      - SQLITE_DB_DIR=/app/db_volume
+
+volumes:
+  sqlite_data:
