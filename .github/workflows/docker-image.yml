@@ -8,12 +8,44 @@ on:
 
 jobs:
 
-  build:
+  build-and-push:
 
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    # 1. Log into your Docker Hub account securely
+    - name: Log in to Docker Hub
+      uses: docker/login-action@v3
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+    # 2. Extract dynamic timestamp for version tagging
+    - name: Set timestamp tag
+      id: vars
+      run: echo "TIMESTAMP=$(date +%s)" >> $GITHUB_ENV
+
+    # 3. Build the Docker image with multiple tags
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
-      
+      run: |
+        docker build . \
+          --file Dockerfile \
+          --tag ${{ secrets.DOCKERHUB_USERNAME }}/my-image-name:${{ env.TIMESTAMP }} \
+          --tag ${{ secrets.DOCKERHUB_USERNAME }}/my-image-name:latest
+
+    # 4. Push the image variants to Docker Hub
+    - name: Push image to Docker Hub
+      run: |
+        docker push ${{ secrets.DOCKERHUB_USERNAME }}/my-image-name:${{ env.TIMESTAMP }}
+        docker push ${{ secrets.DOCKERHUB_USERNAME }}/my-image-name:latest
+
+    # 5. Conditional confirmation step on successful push
+    - name: Status Update
+      if: success()
+      run: |
+        echo "✅ Successfully built and updated container image!"
+        echo "🚀 Image pushed as: ${{ secrets.DOCKERHUB_USERNAME }}/my-image-name:${{ env.TIMESTAMP }}"
+        echo "🔄 'latest' tag has been updated."
